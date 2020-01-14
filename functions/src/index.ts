@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 admin.initializeApp();
 
-export const helloWorld = functions.https.onRequest((request, response) => {
+export const httpReq = functions.https.onRequest((request, response) => {
     let user: any[] = [];
     const prom = admin.firestore().collection('users').get();
     const p2 = prom.then(p => {
@@ -17,8 +17,6 @@ export const helloWorld = functions.https.onRequest((request, response) => {
     });
     p2.catch(e => {
         console.log(e);
-        console.log('Hata');
         response.status(500).send(e);
     });
-    // response.send('Hello from Firebase!\n\n');
 });
